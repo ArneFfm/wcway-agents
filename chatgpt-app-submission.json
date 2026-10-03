@@ -1,0 +1,104 @@
+{
+  "$schema": "https://developers.openai.com/plugins/schemas/chatgpt-app-submission.v1.json",
+  "schema_version": 1,
+  "app_info": {
+    "display_name": "Loonaut",
+    "subtitle": "Find the nearest public toilet",
+    "description": "Find public toilets worldwide. Shows distance, walk time, access rule, fee, opening state and wheelchair access, with a map link. Needs a place name or coordinates. Does not request precise user location. Toilet data is © OpenStreetMap contributors (ODbL).",
+    "category": "TRAVEL"
+  },
+  "tools": {
+    "find_toilets_near": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Searches stored public toilet records. It does not change them. Service caches can refresh.",
+        "open_world_justification": "Reads only the Loonaut toilet data set. The place lookup returns coordinates and publishes nothing.",
+        "destructive_justification": "Does not delete or overwrite user records, publish messages, create bookings or transfer money."
+      }
+    },
+    "get_toilet": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Reads one stored public toilet record. It does not change it.",
+        "open_world_justification": "Reads only the Loonaut toilet data set.",
+        "destructive_justification": "Does not delete or overwrite user records, publish messages, create bookings or transfer money."
+      }
+    }
+  },
+  "test_cases": [
+    {
+      "description": "Find the nearest toilet to a named place.",
+      "user_prompt": "Where is the nearest public toilet to Darmstadt Hauptbahnhof?",
+      "file_attachment_urls": null,
+      "tools_triggered": "find_toilets_near",
+      "expected_output": "Lists toilets sorted by distance with walk time, access rule and opening state. Shows the OpenStreetMap credit. Does not invent a toilet.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Apply accessibility and fee filters.",
+      "user_prompt": "Find a free, wheelchair-accessible public toilet with a changing table near Köln Dom.",
+      "file_attachment_urls": null,
+      "tools_triggered": "find_toilets_near",
+      "expected_output": "Returns only toilets that match the filters. Says so when no toilet matches. Does not relax a filter without telling the user.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Ask a follow-up about one toilet.",
+      "user_prompt": "Find a public toilet near Piazza Navona in Rome, then tell me when the first one is open and whether it costs money.",
+      "file_attachment_urls": null,
+      "tools_triggered": "find_toilets_near, get_toilet",
+      "expected_output": "Reports hours, access rule and fee of the first result. Says unknown when the data is unknown. Shows the last confirmation date.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Ask for a location when the request has none.",
+      "user_prompt": "I need a public toilet right now.",
+      "file_attachment_urls": null,
+      "tools_triggered": "find_toilets_near",
+      "expected_output": "Asks the user for a street, station or town. Does not ask for GPS coordinates.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Search with coordinates the user gave.",
+      "user_prompt": "Find the closest public toilet to latitude 52.5208 and longitude 13.4095.",
+      "file_attachment_urls": null,
+      "tools_triggered": "find_toilets_near",
+      "expected_output": "Searches with the given coordinates. Lists toilets by distance with walk time and shows the OpenStreetMap credit.",
+      "expected_output_url": null
+    }
+  ],
+  "negative_test_cases": [
+    {
+      "description": "Do not trigger for toilet products.",
+      "user_prompt": "Which toilet seat should I buy for my bathroom?",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "The app is not invoked for toilet products or plumbing.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Do not trigger for restaurant search.",
+      "user_prompt": "Recommend a good restaurant near Frankfurt Hauptbahnhof.",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "The app is not invoked for restaurants or other places.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Do not trigger outside the toilet workflow.",
+      "user_prompt": "Send an email to my accountant about my tax return.",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "The app is not invoked for email or tax tasks.",
+      "expected_output_url": null
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "loonaut",
+  "version": "0.1.0",
+  "description": "Find the nearest public toilet worldwide with the Loonaut MCP server.",
+  "author": {
+    "name": "Arne Kellmann"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Loonaut",
+    "shortDescription": "Find the nearest public toilet.",
+    "longDescription": "Loonaut finds public toilets worldwide. It shows distance, walk time, access rule, fee, opening state and wheelchair access. The MCP server is public and needs no key. Toilet data is © OpenStreetMap contributors (ODbL).",
+    "developerName": "Arne Kellmann",
+    "category": "Lifestyle",
+    "capabilities": [],
+    "defaultPrompt": [
+      "Where is the nearest public toilet to Darmstadt Hauptbahnhof?",
+      "Find a step-free public toilet with a changing table near me."
+    ]
+  },
+  "mcpServers": "./.mcp.json",
+  "homepage": "https://loonaut.com/agents.md"
+}

@@ -1,0 +1,122 @@
+{
+  "serverInfo": {
+    "name": "loonaut",
+    "title": "Loonaut",
+    "version": "0.2.0"
+  },
+  "tools": [
+    {
+      "name": "find_toilets_near",
+      "title": "Find public toilets near a place",
+      "description": "Use this when the user asks for the nearest public toilet, or for toilets near a street, station or town. Returns up to 20 toilets sorted by distance, with walk time, access rule, fee, open now, closing time, wheelchair access and a map link. Do not use it for toilet products or plumbing.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "place": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 200,
+            "description": "Street, station, landmark or town from the user message, for example Darmstadt Hauptbahnhof."
+          },
+          "country": {
+            "type": "string",
+            "pattern": "^[A-Za-z]{2}$",
+            "description": "ISO 3166-1 alpha-2 code. Narrows the place lookup."
+          },
+          "lat": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90,
+            "description": "Latitude, WGS84. Send with lon, if you already know the coordinates."
+          },
+          "lon": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180,
+            "description": "Longitude, WGS84."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20,
+            "default": 5
+          },
+          "open_now": {
+            "type": "boolean",
+            "description": "Drop toilets that are closed now. Toilets with unknown hours stay and show open_now unknown."
+          },
+          "wheelchair": {
+            "type": "boolean",
+            "description": "Only wheelchair-accessible toilets."
+          },
+          "changing_table": {
+            "type": "boolean",
+            "description": "Only toilets with a changing table."
+          },
+          "free": {
+            "type": "boolean",
+            "description": "Only toilets known to be free of charge."
+          },
+          "no_purchase_needed": {
+            "type": "boolean",
+            "description": "Only toilets that need no purchase."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "title": "Find public toilets near a place",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "get_toilet",
+      "title": "Get one public toilet",
+      "description": "Use this when the user asks about one toilet from an earlier answer: hours, access rule, fee, last confirmation. Needs the id from find_toilets_near.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,64}$",
+            "description": "Toilet id from find_toilets_near."
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "title": "Get one public toilet",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "name": "nearest_toilet",
+      "title": "Find the nearest public toilet",
+      "description": "Find public toilets near a place and say which one to use.",
+      "arguments": [
+        {
+          "name": "place",
+          "description": "Street, station, landmark or town.",
+          "required": true
+        },
+        {
+          "name": "needs",
+          "description": "Comma separated: wheelchair, changing_table, free, no_purchase_needed.",
+          "required": false
+        }
+      ]
+    }
+  ]
+}

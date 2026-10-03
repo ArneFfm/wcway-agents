@@ -1,0 +1,8 @@
+{
+  "name": "loonaut-agents",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/parity.test.js"
+  }
+}

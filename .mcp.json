@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "loonaut": {
+      "type": "http",
+      "url": "https://loonaut.com/mcp"
+    }
+  }
+}

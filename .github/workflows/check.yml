@@ -1,0 +1,56 @@
+name: Check integrations
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  # The only place in this workflow that names the live host.
+  ORIGIN: https://loonaut.com
+jobs:
+  manifests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+      - name: Validate manifests against their JSON schemas
+        run: |
+          pipx run check-jsonschema --schemafile https://agent-plugins.org/schemas/1.0.0/plugin.schema.json plugin.json
+          pipx run check-jsonschema --schemafile https://agent-plugins.org/schemas/1.0.0/mcp.schema.json mcp.json
+          pipx run check-jsonschema --schemafile https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json server.json
+          pipx run check-jsonschema --schemafile https://developers.openai.com/plugins/schemas/chatgpt-app-submission.v1.json chatgpt-app-submission.json
+      - name: Check that no file names an unknown host
+        run: |
+          if grep -rnoE 'https://[a-z0-9.-]+' --include='*.json' --include='*.md' --exclude=mcp-schema.snapshot.json . \
+            | grep -vE "$ORIGIN|github.com|agent-plugins.org|modelcontextprotocol.io|developers.openai.com|openstreetmap.org|claude.ai"; then
+            echo "::error::Unknown host found. Update it or add it to the allow list."
+            exit 1
+          fi
+      - name: Check parity with the MCP schema snapshot
+        run: npm test
+  mcp-handshake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Compare the live tool list with the snapshot (skipped until loonaut.com serves MCP)
+        run: |
+          rpc() {
+            curl -sS -X POST "$ORIGIN/mcp" \
+              -H 'Content-Type: application/json' \
+              -H 'Accept: application/json, text/event-stream' \
+              -H 'MCP-Protocol-Version: 2025-06-18' \
+              -d "$1"
+          }
+          if ! rpc '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' > live.json 2> /dev/null \
+            || ! jq -e '.result.tools' live.json > /dev/null; then
+            echo "::notice::$ORIGIN/mcp is not live yet. Comparison skipped."
+            exit 0
+          fi
+          diff <(jq -S '[.result.tools[] | {name, inputSchema, annotations}]' live.json) \
+               <(jq -S '[.tools[] | {name, inputSchema, annotations}]' test/mcp-schema.snapshot.json)
+          # Call only read-only tools here.
+          rpc '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"find_toilets_near","arguments":{"place":"Darmstadt Hauptbahnhof","limit":1}}}' \
+            | jq -e '.result.isError != true'

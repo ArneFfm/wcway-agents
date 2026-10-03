@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.loonaut/loonaut",
+  "title": "Loonaut",
+  "description": "Find the nearest public toilet worldwide. Read-only tools, no account, no API key.",
+  "version": "0.1.0",
+  "websiteUrl": "https://loonaut.com/agents.md",
+  "repository": {
+    "url": "https://github.com/ArneFfm/loonaut-agents",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://loonaut.com/icon-512.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://loonaut.com/mcp"
+    }
+  ]
+}
