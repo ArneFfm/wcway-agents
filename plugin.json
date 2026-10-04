@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "wcway",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Find the nearest public toilet worldwide with the wcway MCP server.",
   "homepage": "https://wcway.com/agents.md",
   "keywords": [

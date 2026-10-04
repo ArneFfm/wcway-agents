@@ -1,6 +1,6 @@
 {
   "name": "wcway",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Find the nearest public toilet worldwide with the wcway MCP server.",
   "author": {
     "name": "Arne Kellmann"
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "wcway",
     "shortDescription": "Find the nearest public toilet.",
-    "longDescription": "wcway finds public toilets worldwide. It shows distance, walk time, access rule, fee, opening state and wheelchair access. The MCP server is public and needs no key. Toilet data is © OpenStreetMap contributors (ODbL).",
+    "longDescription": "wcway finds public toilets worldwide. Public search needs no login. Account access uses your wcway passkey through OAuth. It reads your partner listings and can monitor account changes while the relay is ready. Toilet data is © OpenStreetMap contributors (ODbL).",
     "developerName": "Arne Kellmann",
     "category": "Lifestyle",
     "capabilities": [],

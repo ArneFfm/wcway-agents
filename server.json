@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.wcway/wcway",
   "title": "wcway",
-  "description": "Find the nearest public toilet worldwide. Read-only tools, no account, no API key.",
-  "version": "0.1.0",
+  "description": "Find public toilets without login. Sign in to read partner listings and monitor account changes.",
+  "version": "0.2.0",
   "websiteUrl": "https://wcway.com/agents.md",
   "repository": {
     "url": "https://github.com/ArneFfm/wcway-agents",
@@ -22,6 +22,10 @@
     {
       "type": "streamable-http",
       "url": "https://wcway.com/mcp"
+    },
+    {
+      "type": "streamable-http",
+      "url": "https://wcway.com/mcp/account"
     }
   ]
 }

@@ -4,6 +4,10 @@
     "wcway": {
       "type": "streamable-http",
       "url": "https://wcway.com/mcp"
+    },
+    "wcway-account": {
+      "type": "streamable-http",
+      "url": "https://wcway.com/mcp/account"
     }
   }
 }
