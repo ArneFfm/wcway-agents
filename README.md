@@ -4,14 +4,23 @@ Official agent integration files for [wcway](https://wcway.com/agents.md).
 
 wcway finds public toilets worldwide.
 It shows distance, walk time, access rule, fee, opening state and wheelchair access.
-There are no accounts and no API keys.
+Public toilet search needs no account or API key.
+The optional account connection uses your existing wcway passkey through OAuth.
 Toilet data is © OpenStreetMap contributors, ODbL-1.0.
 
 Read the [agent guide](https://wcway.com/agents.md) and the [OpenAPI description](https://wcway.com/openapi.json).
 
 ## Connect with MCP
 
-The remote MCP server is `https://wcway.com/mcp`. It uses Streamable HTTP and needs no authentication.
+Both connections use Streamable HTTP:
+
+| Connection | Endpoint | Access |
+| --- | --- | --- |
+| Public toilet search | `https://wcway.com/mcp` | Keyless |
+| Your partner listings and Events | `https://wcway.com/mcp/account` | wcway passkey through OAuth |
+
+Both endpoints support MCP `2026-07-28`. Modern requests use per-request metadata and matching HTTP headers.
+Public search retains its legacy protocol and result shapes. The public server card advertises no Events.
 
 | Tool | Arguments | Effect |
 |---|---|---|
@@ -30,6 +39,36 @@ claude mcp add --transport http wcway https://wcway.com/mcp
 codex mcp add wcway --url https://wcway.com/mcp
 ```
 
+## Account access and Events
+
+Use an MCP client that supports OAuth. Account discovery lives at `https://wcway.com/.well-known/oauth-protected-resource/mcp/account`.
+The issuer metadata lives at `https://wcway.com/.well-known/oauth-authorization-server`.
+Register a public client at `/oauth/register`. Use authorization code, PKCE S256, scope `account:events` and the exact account resource URI.
+Sign in with your existing passkey and approve the displayed client and return URL.
+Keep tokens in your client's credential store. Do not put tokens in connection URLs or repository files.
+
+The account endpoint adds the read-only `get_my_partner_listings` tool.
+It reads your claims, moderation state, billing state and current profiles.
+Revoke account connections at `https://wcway.com/oauth/connections`.
+Clients can revoke credentials at `/oauth/revoke`.
+
+Authenticated account discovery advertises Events only while the configured relay is ready.
+Check `server/discover` with your account access token before subscribing.
+
+| Event | Change | Optional filters |
+| --- | --- | --- |
+| `partner.claim.status_changed` | Your claim changes moderation status | `listing_id`, `toilet_id` |
+| `partner.profile.updated` | Your profile changes conditions, hours or temporary closure | `listing_id`, `toilet_id` |
+
+Both filters must match when supplied. Subscribe checks ownership; delivery checks it again.
+Filtered profile monitoring requires an approved claim. Revocation and account deletion stop delivery.
+Subscriptions last at most 24 hours. Refresh before `refreshBefore`. Unsubscribe stops the subscription.
+Webhook delivery has no replay. See the [account guidance](https://wcway.com/auth.md).
+
+The public search tools retain their MCP App resource for hosts that support it.
+These files do not prove native ChatGPT rescan, Events subscription, callback delivery or a host response.
+The ChatGPT submission and schema snapshot cover the public search tools.
+
 ## Files
 
 | Path | Use |
@@ -37,9 +76,11 @@ codex mcp add wcway --url https://wcway.com/mcp
 | `plugin.json`, `.mcp.json`, `mcp.json` | Claude plugin and MCP client manifests. |
 | `.codex-plugin/plugin.json` | Codex plugin manifest. |
 | `skills/wcway-find-toilet/SKILL.md` | Skill: tool order, result fields, attribution rule. |
-| `server.json` | MCP Registry entry `com.wcway/wcway`. |
+| `server.json` | MCP Registry entry `com.wcway/wcway`, with public and account endpoints. |
 | `chatgpt-app-submission.json` | ChatGPT app submission data: annotations, test prompts. |
 | `test/` | Parity test and the MCP schema snapshot. |
+
+Registry and plugin versions are `0.2.0`. The server source also reports `0.2.0`; a registry listing needs a successful publisher run and readback.
 
 ## Check
 

@@ -76,7 +76,7 @@
     {
       "name": "get_toilet",
       "title": "Get one public toilet",
-      "description": "Use this when the user asks about one toilet from an earlier answer: hours, access rule, fee, last confirmation. Needs the id from find_toilets_near.",
+      "description": "Use this when the user asks about one toilet from an earlier answer: hours, access rule, fee, last confirmation. Needs the id from find_toilets_near. The provenance field says how many people confirm each fact, or which source it comes from.",
       "inputSchema": {
         "type": "object",
         "properties": {

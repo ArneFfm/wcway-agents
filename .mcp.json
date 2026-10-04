@@ -3,6 +3,10 @@
     "wcway": {
       "type": "http",
       "url": "https://wcway.com/mcp"
+    },
+    "wcway-account": {
+      "type": "http",
+      "url": "https://wcway.com/mcp/account"
     }
   }
 }
