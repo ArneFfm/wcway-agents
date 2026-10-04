@@ -5,7 +5,8 @@ description: Find the nearest public toilet with Loonaut over MCP or the keyless
 
 # Loonaut: find a public toilet
 
-Loonaut finds public toilets worldwide. No account and no API key is needed.
+Loonaut finds public toilets worldwide. Public search needs no account or API key.
+This skill uses the public search endpoint. Account Events use a separate OAuth connection; see the repository README.
 Use this skill when a user asks for the nearest public toilet, or for toilets near a street, station or town.
 Do not use it for toilet products, plumbing or restaurant search.
 
@@ -23,6 +24,8 @@ Ask the user for a place name. Do not ask for GPS coordinates.
 - `access_rule` is one of `free`, `fee`, `customers`, `key`, `scheme`, `unknown`. `unknown` does not mean "no".
 - `open_now` is `true`, `false` or `"unknown"`. Most toilets have no known hours.
 - `last_confirmed_at` is the last time a person confirmed the toilet. Say so when it is old or missing.
+- `provenance.decided` lists facts that people confirmed, with `votes_for` and `votes_total`. Other facts come from `provenance.source`.
+- `partner` fields describe the business's paid listing. Say "the business says" for its conditions and hours. Payment never improves result order.
 - `url` opens the toilet page. `directions` holds walking links.
 
 ## Rules

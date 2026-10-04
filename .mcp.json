@@ -3,6 +3,10 @@
     "loonaut": {
       "type": "http",
       "url": "https://loonaut.com/mcp"
+    },
+    "loonaut-account": {
+      "type": "http",
+      "url": "https://loonaut.com/mcp/account"
     }
   }
 }

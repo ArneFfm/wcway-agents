@@ -4,6 +4,10 @@
     "loonaut": {
       "type": "streamable-http",
       "url": "https://loonaut.com/mcp"
+    },
+    "loonaut-account": {
+      "type": "streamable-http",
+      "url": "https://loonaut.com/mcp/account"
     }
   }
 }

@@ -6,7 +6,8 @@ The server code lives in the `ArneFfm/loonaut` repository.
 - Keep the manifests aligned with the live MCP `tools/list` of https://loonaut.com/mcp.
 - Tool names, schemas and annotations come from `apps/web/src/lib/mcp.ts` in `ArneFfm/loonaut`. Change the server first.
 - `test/mcp-schema.snapshot.json` is a snapshot of that tool list. Regenerate it after each tool change. Staging sits behind Access, so the snapshot comes from the source.
-- Do not add authentication. The MCP server is public and keyless.
+- Keep public toilet search at `/mcp` keyless. The account endpoint `/mcp/account` uses the existing passkey login through OAuth.
+- Advertise account Events only for an authenticated account and a ready relay. Never advertise Events on the public endpoint.
 - Never invent toilets in a skill or test prompt. Keep the OpenStreetMap credit in every skill.
 - Do not submit to a directory, registry or portal without Arne's approval.
 - Increment `version` in `server.json`, `plugin.json` and `.codex-plugin/plugin.json` together before each registry publication.
