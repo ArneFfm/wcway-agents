@@ -1,8 +1,8 @@
 {
   "mcpServers": {
-    "loonaut": {
+    "wcway": {
       "type": "http",
-      "url": "https://loonaut.com/mcp"
+      "url": "https://wcway.com/mcp"
     }
   }
 }

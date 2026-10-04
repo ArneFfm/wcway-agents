@@ -2,7 +2,7 @@
   "$schema": "https://developers.openai.com/plugins/schemas/chatgpt-app-submission.v1.json",
   "schema_version": 1,
   "app_info": {
-    "display_name": "Loonaut",
+    "display_name": "wcway",
     "subtitle": "Find the nearest public toilet",
     "description": "Find public toilets worldwide. Shows distance, walk time, access rule, fee, opening state and wheelchair access, with a map link. Needs a place name or coordinates. Does not request precise user location. Toilet data is © OpenStreetMap contributors (ODbL).",
     "category": "TRAVEL"
@@ -16,7 +16,7 @@
       },
       "justifications": {
         "read_only_justification": "Searches stored public toilet records. It does not change them. Service caches can refresh.",
-        "open_world_justification": "Reads only the Loonaut toilet data set. The place lookup returns coordinates and publishes nothing.",
+        "open_world_justification": "Reads only the wcway toilet data set. The place lookup returns coordinates and publishes nothing.",
         "destructive_justification": "Does not delete or overwrite user records, publish messages, create bookings or transfer money."
       }
     },
@@ -28,7 +28,7 @@
       },
       "justifications": {
         "read_only_justification": "Reads one stored public toilet record. It does not change it.",
-        "open_world_justification": "Reads only the Loonaut toilet data set.",
+        "open_world_justification": "Reads only the wcway toilet data set.",
         "destructive_justification": "Does not delete or overwrite user records, publish messages, create bookings or transfer money."
       }
     }

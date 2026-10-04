@@ -1,5 +1,5 @@
 name: Publish MCP registry
-# Manual only. Run it after loonaut.com serves /mcp and /.well-known/mcp-registry-auth.
+# Manual only. Run it after wcway.com serves /mcp and /.well-known/mcp-registry-auth.
 on: workflow_dispatch
 permissions:
   contents: read
@@ -20,5 +20,5 @@ jobs:
           MCP_REGISTRY_PRIVATE_KEY: ${{ secrets.MCP_REGISTRY_PRIVATE_KEY }}
         run: |
           test -n "$MCP_REGISTRY_PRIVATE_KEY"
-          ./mcp-publisher login http --domain loonaut.com --private-key "$MCP_REGISTRY_PRIVATE_KEY"
+          ./mcp-publisher login http --domain wcway.com --private-key "$MCP_REGISTRY_PRIVATE_KEY"
           ./mcp-publisher publish server.json

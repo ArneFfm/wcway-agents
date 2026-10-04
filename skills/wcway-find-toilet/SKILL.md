@@ -1,17 +1,17 @@
 ---
-name: loonaut-find-toilet
-description: Find the nearest public toilet with Loonaut over MCP or the keyless HTTP API. Use when a user asks where a public toilet is.
+name: wcway-find-toilet
+description: Find the nearest public toilet with wcway over MCP or the keyless HTTP API. Use when a user asks where a public toilet is.
 ---
 
-# Loonaut: find a public toilet
+# wcway: find a public toilet
 
-Loonaut finds public toilets worldwide. No account and no API key is needed.
+wcway finds public toilets worldwide. No account and no API key is needed.
 Use this skill when a user asks for the nearest public toilet, or for toilets near a street, station or town.
 Do not use it for toilet products, plumbing or restaurant search.
 
 ## Call order
 
-1. Call `find_toilets_near` on the MCP server https://loonaut.com/mcp. Send `place` (text such as "Darmstadt Hauptbahnhof"). Send `lat` and `lon` together instead when you know them.
+1. Call `find_toilets_near` on the MCP server https://wcway.com/mcp. Send `place` (text such as "Darmstadt Hauptbahnhof"). Send `lat` and `lon` together instead when you know them.
 2. Read `status` in the result. `needs_location` means ask the user the text in `ask_user`. `place_not_found` means ask for a street, station or town.
 3. Add a filter only when the user needs it: `open_now`, `wheelchair`, `changing_table`, `free`, `no_purchase_needed`.
 4. Call `get_toilet` with an `id` from step 1 to answer a question about one toilet.
@@ -35,6 +35,6 @@ Ask the user for a place name. Do not ask for GPS coordinates.
 
 ## Reference
 
-- Agent guide: https://loonaut.com/agents.md
-- REST API description: https://loonaut.com/openapi.json
-- Tool list: https://loonaut.com/.well-known/mcp/server-card.json
+- Agent guide: https://wcway.com/agents.md
+- REST API description: https://wcway.com/openapi.json
+- Tool list: https://wcway.com/.well-known/mcp/server-card.json

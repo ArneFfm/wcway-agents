@@ -7,7 +7,7 @@ permissions:
   contents: read
 env:
   # The only place in this workflow that names the live host.
-  ORIGIN: https://loonaut.com
+  ORIGIN: https://wcway.com
 jobs:
   manifests:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-      - name: Compare the live tool list with the snapshot (skipped until loonaut.com serves MCP)
+      - name: Compare the live tool list with the snapshot (skipped until wcway.com serves MCP)
         run: |
           rpc() {
             curl -sS -X POST "$ORIGIN/mcp" \
