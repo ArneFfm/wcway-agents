@@ -1,9 +1,9 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
   "mcpServers": {
-    "loonaut": {
+    "wcway": {
       "type": "streamable-http",
-      "url": "https://loonaut.com/mcp"
+      "url": "https://wcway.com/mcp"
     }
   }
 }

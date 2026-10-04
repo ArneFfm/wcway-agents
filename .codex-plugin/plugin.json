@@ -1,15 +1,15 @@
 {
-  "name": "loonaut",
+  "name": "wcway",
   "version": "0.1.0",
-  "description": "Find the nearest public toilet worldwide with the Loonaut MCP server.",
+  "description": "Find the nearest public toilet worldwide with the wcway MCP server.",
   "author": {
     "name": "Arne Kellmann"
   },
   "skills": "./skills/",
   "interface": {
-    "displayName": "Loonaut",
+    "displayName": "wcway",
     "shortDescription": "Find the nearest public toilet.",
-    "longDescription": "Loonaut finds public toilets worldwide. It shows distance, walk time, access rule, fee, opening state and wheelchair access. The MCP server is public and needs no key. Toilet data is © OpenStreetMap contributors (ODbL).",
+    "longDescription": "wcway finds public toilets worldwide. It shows distance, walk time, access rule, fee, opening state and wheelchair access. The MCP server is public and needs no key. Toilet data is © OpenStreetMap contributors (ODbL).",
     "developerName": "Arne Kellmann",
     "category": "Lifestyle",
     "capabilities": [],
@@ -19,5 +19,5 @@
     ]
   },
   "mcpServers": "./.mcp.json",
-  "homepage": "https://loonaut.com/agents.md"
+  "homepage": "https://wcway.com/agents.md"
 }

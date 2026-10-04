@@ -1,14 +1,14 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "loonaut",
+  "name": "wcway",
   "version": "0.1.0",
-  "description": "Find the nearest public toilet worldwide with the Loonaut MCP server.",
-  "homepage": "https://loonaut.com/agents.md",
+  "description": "Find the nearest public toilet worldwide with the wcway MCP server.",
+  "homepage": "https://wcway.com/agents.md",
   "keywords": [
     "mcp",
     "public-toilet",
     "openstreetmap",
     "public-api"
   ],
-  "repository": "https://github.com/ArneFfm/loonaut-agents"
+  "repository": "https://github.com/ArneFfm/wcway-agents"
 }

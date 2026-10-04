@@ -1,17 +1,17 @@
-# Loonaut agent integrations
+# wcway agent integrations
 
-Official agent integration files for [Loonaut](https://loonaut.com/agents.md).
+Official agent integration files for [wcway](https://wcway.com/agents.md).
 
-Loonaut finds public toilets worldwide.
+wcway finds public toilets worldwide.
 It shows distance, walk time, access rule, fee, opening state and wheelchair access.
 There are no accounts and no API keys.
 Toilet data is © OpenStreetMap contributors, ODbL-1.0.
 
-Read the [agent guide](https://loonaut.com/agents.md) and the [OpenAPI description](https://loonaut.com/openapi.json).
+Read the [agent guide](https://wcway.com/agents.md) and the [OpenAPI description](https://wcway.com/openapi.json).
 
 ## Connect with MCP
 
-The remote MCP server is `https://loonaut.com/mcp`. It uses Streamable HTTP and needs no authentication.
+The remote MCP server is `https://wcway.com/mcp`. It uses Streamable HTTP and needs no authentication.
 
 | Tool | Arguments | Effect |
 |---|---|---|
@@ -21,13 +21,13 @@ The remote MCP server is `https://loonaut.com/mcp`. It uses Streamable HTTP and 
 ### Claude Code
 
 ```sh
-claude mcp add --transport http loonaut https://loonaut.com/mcp
+claude mcp add --transport http wcway https://wcway.com/mcp
 ```
 
 ### Codex CLI
 
 ```sh
-codex mcp add loonaut --url https://loonaut.com/mcp
+codex mcp add wcway --url https://wcway.com/mcp
 ```
 
 ## Files
@@ -36,8 +36,8 @@ codex mcp add loonaut --url https://loonaut.com/mcp
 |---|---|
 | `plugin.json`, `.mcp.json`, `mcp.json` | Claude plugin and MCP client manifests. |
 | `.codex-plugin/plugin.json` | Codex plugin manifest. |
-| `skills/loonaut-find-toilet/SKILL.md` | Skill: tool order, result fields, attribution rule. |
-| `server.json` | MCP Registry entry `com.loonaut/loonaut`. |
+| `skills/wcway-find-toilet/SKILL.md` | Skill: tool order, result fields, attribution rule. |
+| `server.json` | MCP Registry entry `com.wcway/wcway`. |
 | `chatgpt-app-submission.json` | ChatGPT app submission data: annotations, test prompts. |
 | `test/` | Parity test and the MCP schema snapshot. |
 

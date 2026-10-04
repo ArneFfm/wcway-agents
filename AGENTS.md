@@ -1,10 +1,10 @@
-# Loonaut integrations
+# wcway integrations
 
-This repository holds the public agent plugin, skill, ChatGPT app submission and MCP registry metadata for Loonaut.
-The server code lives in the `ArneFfm/loonaut` repository.
+This repository holds the public agent plugin, skill, ChatGPT app submission and MCP registry metadata for wcway.
+The server code lives in the `ArneFfm/wcway` repository.
 
-- Keep the manifests aligned with the live MCP `tools/list` of https://loonaut.com/mcp.
-- Tool names, schemas and annotations come from `apps/web/src/lib/mcp.ts` in `ArneFfm/loonaut`. Change the server first.
+- Keep the manifests aligned with the live MCP `tools/list` of https://wcway.com/mcp.
+- Tool names, schemas and annotations come from `apps/web/src/lib/mcp.ts` in `ArneFfm/wcway`. Change the server first.
 - `test/mcp-schema.snapshot.json` is a snapshot of that tool list. Regenerate it after each tool change. Staging sits behind Access, so the snapshot comes from the source.
 - Do not add authentication. The MCP server is public and keyless.
 - Never invent toilets in a skill or test prompt. Keep the OpenStreetMap credit in every skill.
@@ -15,10 +15,10 @@ The server code lives in the `ArneFfm/loonaut` repository.
 ## Checks
 
 `npm test` runs the parity test against the snapshot.
-`.github/workflows/check.yml` validates the manifests against their schemas, runs the parity test and compares the live tool list with the snapshot. The live comparison is skipped while loonaut.com does not serve MCP.
-`publish-mcp.yml` publishes `server.json` to the MCP Registry. It runs only by hand. It needs the secret `MCP_REGISTRY_PRIVATE_KEY`. See `docs/mcp-registry-publishing.md` in `ArneFfm/loonaut`.
+`.github/workflows/check.yml` validates the manifests against their schemas, runs the parity test and compares the live tool list with the snapshot. The live comparison is skipped while wcway.com does not serve MCP.
+`publish-mcp.yml` publishes `server.json` to the MCP Registry. It runs only by hand. It needs the secret `MCP_REGISTRY_PRIVATE_KEY`. See `docs/mcp-registry-publishing.md` in `ArneFfm/wcway`.
 
 ## Regenerate the snapshot
 
-Run in a checkout of `ArneFfm/loonaut`. Write a temporary test in `apps/web/src/lib` that imports `serverInfo`, `tools` and `mcpPrompts` from `./mcp`.
+Run in a checkout of `ArneFfm/wcway`. Write a temporary test in `apps/web/src/lib` that imports `serverInfo`, `tools` and `mcpPrompts` from `./mcp`.
 Keep `name`, `title`, `description`, `inputSchema` and `annotations` of each tool. Write the JSON to `test/mcp-schema.snapshot.json`. Delete the temporary test.

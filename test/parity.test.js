@@ -25,16 +25,16 @@ test("submission test cases trigger only live tools", () => {
 });
 
 test("every skill names live tools only and covers each tool", () => {
-  const skill = read("skills/loonaut-find-toilet/SKILL.md");
+  const skill = read("skills/wcway-find-toilet/SKILL.md");
   const used = new Set([...skill.matchAll(/`((?:find|get)_[a-z_]+)`/g)].map((match) => match[1]));
   for (const name of used) assert.ok(names.includes(name), `unknown tool ${name}`);
   for (const name of names) assert.ok(used.has(name), `skill misses ${name}`);
 });
 
 test("every manifest points at the live MCP URL", () => {
-  const url = "https://loonaut.com/mcp";
-  assert.equal(json("mcp.json").mcpServers.loonaut.url, url);
-  assert.equal(json(".mcp.json").mcpServers.loonaut.url, url);
+  const url = "https://wcway.com/mcp";
+  assert.equal(json("mcp.json").mcpServers.wcway.url, url);
+  assert.equal(json(".mcp.json").mcpServers.wcway.url, url);
   assert.equal(json("server.json").remotes[0].url, url);
 });
 
