@@ -1,5 +1,6 @@
 # wcway agent integrations
 
+[![AgentHub 已收录：wcway](https://myagenthub.cn/badge/com.wcway/wcway)](https://myagenthub.cn/p/com.wcway/wcway)
 Official agent integration files for [wcway](https://wcway.com/agents.md).
 
 wcway finds public toilets worldwide.
